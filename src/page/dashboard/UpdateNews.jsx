@@ -212,7 +212,6 @@ export default function UpdateNews() {
                       }
                     </div>
                   </div>
-
               </div>
           </div>
         </form>

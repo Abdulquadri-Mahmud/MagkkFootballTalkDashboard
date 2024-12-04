@@ -27,7 +27,7 @@ export default function NewsList() {
          <tr key={data._id}>
             <td class="px-2 lg:py-3 py-2 text-sm text-start text-black font-medium">
                 <div className="w-[50px] px-2 pb-2">
-                    <img src={data.image} alt="" className='max-w-[50px] h-[50px]'/>
+                    <img src={data.source} alt="" className='max-w-[50px] h-[50px]'/>
                 </div>
             </td>
             <td class="px-2 lg:py-3 py-2 text-sm text-start text-black font-medium">{data.title}</td>

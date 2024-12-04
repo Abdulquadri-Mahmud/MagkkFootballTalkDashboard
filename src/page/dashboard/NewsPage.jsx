@@ -49,7 +49,7 @@ export default function NewsPage() {
             source: [...prevFormData.source, uploadedUrl],
           }));
   
-          alert(`Image uploaded successfully! URL: ${uploadedUrl}`);
+          // alert(`Image uploaded successfully! URL: ${uploadedUrl}`);
         } else if (error) {
           console.error("Upload Error:", error);
           alert("An error occurred during upload.");
