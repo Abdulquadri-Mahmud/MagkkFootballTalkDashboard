@@ -47,7 +47,7 @@ export default function UpdateNews() {
             source: [...prevFormData.source, uploadedUrl],
           }));
   
-          alert(`Image uploaded successfully! URL: ${uploadedUrl}`);
+          // alert(`Image uploaded successfully! URL: ${uploadedUrl}`);
         } else if (error) {
           console.error("Upload Error:", error);
           alert("An error occurred during upload.");
@@ -57,19 +57,23 @@ export default function UpdateNews() {
   }
 
   useEffect(() => {
-    const fetchNews = async () => {
-      const url = `https://fake-api-one-rust.vercel.app/api/news/single_news/${id}`;
-  
-      const res = await fetch(url);
-  
-      const data = await res.json();
-  
-      if (data.success === false) {
-        setError('Error while fetching data!');
-      }
-  
-      formData(data);
-    }; fetchNews();
+    try {
+      const fetchNews = async () => {
+        const url = `https://fake-api-one-rust.vercel.app/api/news/single_news/${id}`;
+    
+        const res = await fetch(url);
+    
+        const data = await res.json();
+    
+        if (data.success === false) {
+          setError('Error while fetching data!');
+        }
+    
+        setFormData(data);
+      }; fetchNews();
+    } catch (error) {
+      setError(error)
+    }
   }, []);
   
   const handleSubmit = async (e) => {
@@ -80,14 +84,14 @@ export default function UpdateNews() {
       setLoading(true);
   
       const res = await fetch(url, {
-        method: 'POST',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
   
       const data = await res.json();
   
-      if (!data.success) {
+      if (data.success === false) {
         // Handle error if response indicates failure
         setError(data.message || 'Something went wrong');
         return; // Exit the function early
@@ -96,18 +100,18 @@ export default function UpdateNews() {
       // If successful
       setSuccess(true);
       setError(false);
-
-      toast.success('News update successfully!');
-      
     } catch (error) {
       // Handle network or other unexpected errors
       setError(error.message || 'An unexpected error occurred');
-      toast.error(`Error: ${data.message || 'Failed to create gadget'}`);
+      // toast.error(`Error: ${data.message || 'Failed to create gadget'}`);
     } finally {
       // Ensure loading state is reset
       setLoading(false);
     }
   };
+
+  console.log(formData);
+  
 
   return (
     <div className='flex h-[100vh] bg-zinc-200'>
@@ -209,11 +213,9 @@ export default function UpdateNews() {
                     </div>
                   </div>
 
-
               </div>
           </div>
         </form>
-
         </div>
       </div>
     </div>

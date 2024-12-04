@@ -98,19 +98,23 @@ export default function NewsPage() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      const url = `https://fake-api-one-rust.vercel.app/api/news/all_news`;
-  
-      const res = await fetch(url);
-  
-      const data = await res.json();
-  
-      if (data.success === false) {
-        setError('Error while fetching data!');
-      }
-  
-      setNews(data);
-    }; fetchNews();
+    try {
+      const fetchNews = async () => {
+        const url = `https://fake-api-one-rust.vercel.app/api/news/all_news`;
+    
+        const res = await fetch(url);
+    
+        const data = await res.json();
+    
+        if (data.success === false) {
+          setError('Error while fetching data!');
+        }
+    
+        setNews(data);
+      }; fetchNews();
+    } catch (error) {
+      setError(error);
+    }
   }, []);
 
   return (
