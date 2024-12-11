@@ -6,7 +6,7 @@ export default function Betslips() {
 
   return (
     <div>
-      <h2 className="font-medium text-xl">Bestlips</h2>
+      <h2 className="font-medium text-xl">Betslips Code</h2>
       <div className="flex justify-center items-center pt-7">
         <p className="text-4xl text-blue-900">{bet.length}</p>
       </div>
